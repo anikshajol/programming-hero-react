@@ -1,0 +1,12 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+  gap: 5px;
+}
+
+.border {
+  border: 1px solid red;
+  padding: 20px;
+  width: 300px;
+}
