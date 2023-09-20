@@ -1,0 +1,8 @@
+nav ul li a.active {
+    border-bottom: 2px solid red;
+    width: 5px;
+}
+
+nav a{
+    font-size: 1.5rem;
+}
