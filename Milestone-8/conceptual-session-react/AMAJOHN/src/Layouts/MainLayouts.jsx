@@ -1,19 +1,22 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigation } from "react-router-dom";
 import Nav from "../Pages/Nav/Nav";
 import Footer from "../Pages/Footer/Footer";
 
-
-
 const MainLayouts = () => {
-    return (
-        <div>
-            <Nav></Nav>
-           <div className="min-h-screen">
-           <Outlet></Outlet>
-           </div>
+  const navigation = useNavigation();
+  return (
+    <div>
+      <Nav></Nav>
+      <div className="min-h-screen">
+        {navigation.state === "loading" ? (
+          <div>Loading............</div>
+        ) : (
+          <Outlet></Outlet>
+        )}
+      </div>
       <Footer></Footer>
-        </div>
-    );
+    </div>
+  );
 };
 
 export default MainLayouts;
