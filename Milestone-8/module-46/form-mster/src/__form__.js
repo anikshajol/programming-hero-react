@@ -10,6 +10,9 @@
 
 4. Uncontrolled element : useRef to create a reference to the element and access value by using like: nameRef.current.value
 
+5. useHook to handle states and submit and error . example : react hook form
+
+6. reusable component. 
 
 
 */

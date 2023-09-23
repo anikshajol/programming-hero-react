@@ -10,9 +10,9 @@ const SimpleForm = () => {
     <div>
       <form onSubmit={handleSubmit}>
         <input type="text" name="name" id="" /> <br />
-        <input type="text" name="number" id="" />
+        <input type="email" name="email" id="" />
         <br />
-        <input type="text" name="phone" id="" />
+        <input type="password" name="password" id="" />
         <br />
         <input type="submit" value="Submit" />
       </form>
