@@ -1,0 +1,9 @@
+.job-type-btn {
+  padding: 8px 20px;
+  font-weight: 900;
+  border: 1px solid #7e90fe;
+  background: var(--Linear, linear-gradient(90deg, #7e90fe 0%, #9873ff 100%));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
