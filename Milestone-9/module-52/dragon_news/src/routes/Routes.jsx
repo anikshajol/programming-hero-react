@@ -1,22 +1,45 @@
 import { createBrowserRouter } from "react-router-dom";
-import MainLayout from "../layouts/MainLayout";
-import Home from "../Pages/Home";
+import Root from "../layouts/Root";
+import Home from "../pages/Home/Home";
+import Login from "../pages/Login/Login";
+import Register from "../pages/Register/Register";
+import News from "../pages/News/News";
+import PrivateRoute from "./PrivateRoute";
 
-const routes = createBrowserRouter([
+const router = createBrowserRouter([
   {
     path: "/",
-    element: <MainLayout></MainLayout>,
+    element: <Root></Root>,
     children: [
       {
         path: "/",
         element: <Home></Home>,
+        loader: () => fetch("../../public/news.json"),
       },
       {
         path: "/home",
         element: <Home></Home>,
+        loader: () => fetch("../../public/news.json"),
+      },
+      {
+        path: "/news/:id",
+        element: (
+          <PrivateRoute>
+            <News></News>
+          </PrivateRoute>
+        ),
+        loader: () => fetch("../../public/news.json"),
+      },
+      {
+        path: "/login",
+        element: <Login></Login>,
+      },
+      {
+        path: "/register",
+        element: <Register></Register>,
       },
     ],
   },
 ]);
 
-export default routes;
+export default router;
