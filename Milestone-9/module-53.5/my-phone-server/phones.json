@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "brand": "Samsung",
+    "model": "Galaxy S21",
+    "release_year": 2021,
+    "screen_size": 6.2,
+    "storage": 128,
+    "color": "Phantom Gray"
+  },
+  {
+    "id": 2,
+    "brand": "Apple",
+    "model": "iPhone 12",
+    "release_year": 2020,
+    "screen_size": 6.1,
+    "storage": 256,
+    "color": "Pacific Blue"
+  },
+  {
+    "id": 3,
+    "brand": "Google",
+    "model": "Pixel 5",
+    "release_year": 2020,
+    "screen_size": 6.0,
+    "storage": 128,
+    "color": "Just Black"
+  }
+]
