@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "../Providers/AuthProvider";
+import axios from "axios";
 
 const SignIn = () => {
   const { login } = useContext(AuthContext);
@@ -9,26 +10,27 @@ const SignIn = () => {
     const email = form.email.value;
     const password = form.password.value;
     console.log(email, password);
-    login(email, password)
-      .then((res) => {
-        console.log(res.user);
-        const user = {
-          email,
-          lastLoggedAt: res.user?.metadata?.lastSignInTime,
-        };
-        fetch(`http://localhost:5000/user`, {
-          method: "PATCH",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(user),
-        })
-          .then((res) => res.json())
-          .then((data) => console.log(data));
-      })
-      .catch((err) => {
-        console.log(err.message);
+    login(email, password).then((res) => {
+      console.log(res.user);
+      const user = {
+        email,
+        lastLoggedAt: res.user?.metadata?.lastSignInTime,
+      };
+
+      axios.patch(`http://localhost:5000/user`, user).then((data) => {
+        console.log(data.data);
       });
+
+      // fetch(`http://localhost:5000/user`, {
+      //   method: "PATCH",
+      //   headers: {
+      //     "content-type": "application/json",
+      //   },
+      //   body: JSON.stringify(user),
+      // })
+      //   .then((res) => res.json())
+      //   .then((data) => console.log(data));
+    });
   };
   return (
     <div>
