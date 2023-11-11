@@ -1,0 +1,8 @@
+.featured-item {
+  background-image: url("../../../assets/home/featured.jpg");
+  background-repeat: no-repeat;
+  padding: 10px 0;
+  color: white;
+  font-weight: bold;
+  background-attachment: fixed;
+}
