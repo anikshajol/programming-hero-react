@@ -11,7 +11,7 @@ const Featured = () => {
           heading={"FROM OUR MENU"}
         ></SectionTitle>
 
-        <div className="flex flex-col md:flex-row justify-center items-center pb-20 pt-12 px-36 gap-12 bg-black opacity-50 w-screen  ">
+        <div className="flex flex-col md:flex-row justify-center items-center pb-20 pt-12 px-36 gap-12 bg-black opacity-50 ">
           <div>
             <img src={featuredImg} alt="" />
           </div>
