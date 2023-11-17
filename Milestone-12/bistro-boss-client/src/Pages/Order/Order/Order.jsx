@@ -12,7 +12,7 @@ const Order = () => {
   const categories = ["Salad", "Pizza", "Soups", "Dessert", "Drinks"];
   const { category } = useParams();
   const initialIndex = categories.indexOf(category);
-  console.log(category);
+  // console.log(category);
 
   const [tabIndex, setTabIndex] = useState(initialIndex);
   console.log(tabIndex);
@@ -27,7 +27,7 @@ const Order = () => {
       <Cover img={orderBannerImg} title={"OUR SHOP"}></Cover>
 
       <div className=" w-5/6 mx-auto py-10 text-center">
-        <Tabs defaultIndex={1} onSelect={(index) => setTabIndex(index)}>
+        <Tabs defaultIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
           <TabList>
             <Tab>Salad</Tab>
             <Tab>Pizza</Tab>

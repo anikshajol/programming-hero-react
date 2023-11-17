@@ -1,7 +1,26 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import "./Navbar.css";
+import { useContext } from "react";
+import { AuthContext } from "../../../Providers/AuthProviders";
+import { FaCartArrowDown } from "react-icons/fa6";
+import useCart from "../../../Hooks/useCart";
 
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const [cart] = useCart();
+
+  // console.log(user.displayName);
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {
+        navigate("/login");
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
   const links = (
     <>
       <li>
@@ -17,8 +36,26 @@ const Navbar = () => {
         <NavLink to={"/menu"}>Our Menu</NavLink>
       </li>
       <li>
-        <NavLink to={"/order"}>Our Shop</NavLink>
+        <NavLink to={"/order/salad"}>Our Shop</NavLink>
       </li>
+      <li>
+        <NavLink to={"/secret"}> Secret</NavLink>
+      </li>
+
+      {!user ? (
+        <>
+          <li>
+            <NavLink to={"/login"}>Login</NavLink>
+          </li>
+          <li>
+            <NavLink to={"/register"}>Register</NavLink>
+          </li>
+        </>
+      ) : (
+        <li className="hidden" onClick={handleLogOut}>
+          <NavLink to={"/"}>Logout</NavLink>
+        </li>
+      )}
     </>
   );
 
@@ -59,8 +96,32 @@ const Navbar = () => {
             {links}
           </ul>
         </div>
+
         <div className="navbar-end">
-          <a className="btn">Button</a>
+          {user ? (
+            <>
+              <Link to={"/"}>
+                <button className="btn">
+                  <FaCartArrowDown />
+                  <div className="badge badge-secondary">{cart.length}</div>
+                </button>
+              </Link>
+              <div className="avatar">
+                <div className="w-12 rounded-full">
+                  <img src={user?.photoURL} />
+                </div>
+              </div>
+              <button onClick={handleLogOut}>
+                <NavLink to={"/"}>Logout</NavLink>
+              </button>
+            </>
+          ) : (
+            <div className="avatar hidden">
+              <div className="w-12 rounded-full">
+                <img src="" />
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
