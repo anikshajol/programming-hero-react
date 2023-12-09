@@ -4,11 +4,13 @@ import { useContext } from "react";
 import { AuthContext } from "../../../Providers/AuthProviders";
 import { FaCartArrowDown } from "react-icons/fa6";
 import useCart from "../../../Hooks/useCart";
+import useAdmin from "../../../Hooks/useAdmin";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   const navigate = useNavigate();
   const [cart] = useCart();
+  const [isAdmin] = useAdmin();
 
   // console.log(user.displayName);
   const handleLogOut = () => {
@@ -30,14 +32,31 @@ const Navbar = () => {
         <NavLink to={"/contact"}>Contact us</NavLink>
       </li>
       <li>
-        <NavLink to={"/Dashboard"}>Dashboard</NavLink>
-      </li>
-      <li>
         <NavLink to={"/menu"}>Our Menu</NavLink>
       </li>
       <li>
-        <NavLink to={"/order/salad"}>Our Shop</NavLink>
+        <NavLink to={"/order/Salad"}>Our Shop</NavLink>
       </li>
+
+      {user && isAdmin && (
+        <>
+          <li>
+            {" "}
+            <NavLink to={"/dashboard/adminHome"}> Admin Home </NavLink>{" "}
+          </li>
+
+          <li>
+            <NavLink to={"/dashboard"}>Dashboard</NavLink>
+          </li>
+        </>
+      )}
+      {user && !isAdmin && (
+        <li>
+          {" "}
+          <NavLink to={"/dashboard/userHome"}> User Home </NavLink>{" "}
+        </li>
+      )}
+
       <li>
         <NavLink to={"/secret"}> Secret</NavLink>
       </li>
@@ -100,10 +119,10 @@ const Navbar = () => {
         <div className="navbar-end">
           {user ? (
             <>
-              <Link to={"/"}>
+              <Link to={"/dashboard/cart"}>
                 <button className="btn">
                   <FaCartArrowDown />
-                  <div className="badge badge-secondary">{cart.length}</div>
+                  <div className="badge badge-secondary">+{cart.length}</div>
                 </button>
               </Link>
               <div className="avatar">
@@ -116,11 +135,7 @@ const Navbar = () => {
               </button>
             </>
           ) : (
-            <div className="avatar hidden">
-              <div className="w-12 rounded-full">
-                <img src="" />
-              </div>
-            </div>
+            <div className="avatar hidden"></div>
           )}
         </div>
       </div>

@@ -10,7 +10,7 @@ const Main = () => {
     location.pathname.includes("register");
 
   return (
-    <div className="max-w-screen-xl mx-auto">
+    <div className="">
       {noHeaderFooter || <Navbar></Navbar>}
       <Outlet></Outlet>
       {noHeaderFooter || <Footer></Footer>}

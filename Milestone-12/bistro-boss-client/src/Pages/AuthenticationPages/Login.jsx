@@ -8,14 +8,13 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Providers/AuthProviders";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import Google from "./SocialLogin/Google";
 
 const Login = () => {
   // const captchaRef = useRef(null);
   const [disable, setDisable] = useState(true);
   const navigate = useNavigate();
   const location = useLocation();
-
-  const from = location?.state?.from?.pathname || "/";
 
   const { login } = useContext(AuthContext);
 
@@ -46,7 +45,7 @@ const Login = () => {
         },
       });
       // <Navigate to={"/"}></Navigate>;
-      navigate(from, { replace: true });
+      navigate(location?.state ? location.state : "/");
     });
   };
 
@@ -130,7 +129,8 @@ const Login = () => {
                 />
               </div>
             </form>
-            <small>
+            <Google></Google>
+            <small className="px-3">
               No account? <Link to={"/register"}> Register </Link>
             </small>
           </div>

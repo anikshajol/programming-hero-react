@@ -4,10 +4,14 @@ import { AuthContext } from "../../Providers/AuthProviders";
 import { useForm } from "react-hook-form";
 import { Helmet } from "react-helmet-async";
 import { Link, useNavigate } from "react-router-dom";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import Swal from "sweetalert2";
+import Google from "./SocialLogin/Google";
 const Register = () => {
   const { createUser, updateUserProfile } = useContext(AuthContext);
 
   const navigate = useNavigate();
+  const axiosPublic = useAxiosPublic();
 
   const {
     register,
@@ -25,12 +29,29 @@ const Register = () => {
         console.log(regUser);
         updateUserProfile(data.name, data.photo)
           .then(() => {
-            console.log("name and photo update");
+            // console.log("name and photo update");
+            const userInfo = {
+              name: data.name,
+              email: data.email,
+            };
+
+            axiosPublic.post("/users", userInfo).then((res) => {
+              if (res.data.insertedId) {
+                console.log("user added to the data base");
+                Swal.fire({
+                  position: "top-end",
+                  icon: "success",
+                  title: "Your registration successfully complete",
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+                navigate("/");
+              }
+            });
           })
           .catch((err) => {
             console.log(err);
           });
-        navigate("/");
       })
       .catch((err) => {
         console.log(err);
@@ -139,7 +160,8 @@ const Register = () => {
                   />
                 </div>
               </form>
-              <small>
+              <Google />
+              <small className="px-4">
                 Already Have an account? <Link to={"/login"}> Login </Link>
               </small>
             </div>

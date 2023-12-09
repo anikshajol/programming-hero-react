@@ -9,9 +9,11 @@ const PrivateRoute = ({ children }) => {
 
   if (loading) {
     return (
-      <p className=" flex justify-center items-center animate-spin border-dashed border-red-600">
-        ......
-      </p>
+      <progress
+        className="progress progress-secondary w-56"
+        value="40"
+        max="100"
+      ></progress>
     );
   }
 
@@ -19,7 +21,7 @@ const PrivateRoute = ({ children }) => {
     return children;
   }
 
-  return <Navigate to={"/login"} state={{ from: location }} replace></Navigate>;
+  return <Navigate state={location.pathname} to={"/login"}></Navigate>;
 };
 
 export default PrivateRoute;
